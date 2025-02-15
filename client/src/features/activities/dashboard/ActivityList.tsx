@@ -5,14 +5,12 @@ type Props = {
   activities: Activity[];
   selectActivity: (id: string) => void;
   closeForm: () => void;
-  deleteActivity: (id: string) => void;
 };
 
 export default function ActivityList({
   activities,
   selectActivity,
   closeForm,
-  deleteActivity,
 }: Props) {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
@@ -22,7 +20,6 @@ export default function ActivityList({
           activity={activity}
           selectActivity={selectActivity}
           closeForm={closeForm}
-          deleteActivity={deleteActivity}
         />
       ))}
     </Box>

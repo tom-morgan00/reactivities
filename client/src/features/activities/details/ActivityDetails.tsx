@@ -6,18 +6,23 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import { useActivities } from "../../../lib/hooks/useActivities";
 
 type Props = {
-  activity: Activity | null;
+  selectedActivity: Activity;
   cancelActivity: () => void;
   openForm: (id?: string) => void;
 };
 
 export default function ActivityDetails({
-  activity,
+  selectedActivity,
   cancelActivity,
   openForm,
 }: Props) {
+  const { activities } = useActivities();
+  const activity = activities?.find(
+    (activity) => activity.id === selectedActivity.id
+  );
   return (
     activity && (
       <Card>
