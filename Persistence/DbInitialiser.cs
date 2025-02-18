@@ -5,7 +5,7 @@ namespace Persistence;
 
 public class DbInitialiser
 {
-    public static async Task SeedData(AppDbContext context) 
+    public static async Task SeedData(AppDbContext context)
     {
         if (context.Activities.Any()) return;
 
