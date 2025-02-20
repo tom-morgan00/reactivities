@@ -4,8 +4,8 @@
 ## Get latest from `dotnet new gitignore`
 
 # dotenv files
-*.env
-*.env.development
+.env
+.env.development
 
 # User-specific files
 *.rsuser
@@ -487,3 +487,5 @@ API/appsettings.json
 API/reactivities.db
 API/reactivities.db-shm
 API/reactivities.db-wal
+client/.env.development
+client/.env
