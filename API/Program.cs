@@ -1,10 +1,10 @@
-using API.Middlewares;
-using Application.Activities.Queries;
-using Application.Activities.Validators;
 using Application.Core;
-using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Application.Activities.Queries;
+using API.Middlewares;
+using Application.Activities.Validators;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
