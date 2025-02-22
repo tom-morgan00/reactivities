@@ -15,7 +15,7 @@ import DateTimeInput from "../../../app/shared/components/DateTimeInput";
 import LocationInput from "../../../app/shared/components/LocationInput";
 
 export default function ActivityForm() {
-  const { handleSubmit, reset, control } = useForm({
+  const { handleSubmit, reset, control, setError, clearErrors } = useForm({
     mode: "onTouched",
     resolver: zodResolver(activitySchema),
   });
@@ -41,22 +41,28 @@ export default function ActivityForm() {
   const onSubmit = async (data: ActivitySchema) => {
     const { location, ...rest } = data;
     const flattenedData = { ...rest, ...location };
-    console.log("flattened: ", flattenedData);
-    try {
-      if (activity) {
-        updateActivity.mutate(
-          { ...activity, ...flattenedData },
-          {
-            onSuccess: () => navigate(`/activities/${activity.id}`),
-          }
-        );
-      } else {
-        createActivity.mutate(flattenedData, {
-          onSuccess: (id) => navigate(`/activities/${id}`),
-        });
-      }
-    } catch (error) {
-      console.dir("returned error", error);
+    if (activity) {
+      updateActivity.mutate(
+        { ...activity, ...flattenedData },
+        {
+          onSuccess: () => navigate(`/activities/${activity.id}`),
+          onError: (errors) => {
+            if (Array.isArray(errors)) {
+              errors.forEach((err) => {
+                if (err.includes("Title")) {
+                  setError("title", { message: err });
+                }
+              });
+            } else {
+              clearErrors();
+            }
+          },
+        }
+      );
+    } else {
+      createActivity.mutate(flattenedData, {
+        onSuccess: (id) => navigate(`/activities/${id}`),
+      });
     }
   };
 

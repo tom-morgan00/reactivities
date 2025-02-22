@@ -36,8 +36,6 @@ export default function LocationInput<T extends FieldValues>(props: Props<T>) {
     }
   }, [field, setInputValue]);
 
-  console.log(suggestions);
-
   const fetchSuggestions = useMemo(
     () =>
       debounce(async (query: string) => {
@@ -50,7 +48,6 @@ export default function LocationInput<T extends FieldValues>(props: Props<T>) {
           const result = await axios.get<LocationIQSuggestion[]>(
             `${locationUrl}&q=${query}`
           );
-          console.log(result);
           setSuggestions(result.data);
         } catch (error) {
           console.log(error);
