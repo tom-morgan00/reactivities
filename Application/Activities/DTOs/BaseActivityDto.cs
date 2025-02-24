@@ -12,4 +12,7 @@ public class BaseActivityDto
     public string Venue { get; set; } = "";
     public double Longitude { get; set; }
     public double Latitude { get; set; }
+    public string HostId { get; set; } = "";
+    public string HostDisplayName { get; set; } = "";
+    public bool IsCancelled { get; set; }
 }
